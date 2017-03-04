@@ -24,16 +24,11 @@
 package be.yildiz.launcher.shared.files;
 
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.Set;
 
 public class ListComparatorTest {
-
-    @Rule
-    public final ExpectedException rule = ExpectedException.none();
 
     private static final String VALID_XML = "<test></test>";
 
@@ -43,39 +38,33 @@ public class ListComparatorTest {
 
     private static final String NOT_ALL_FILES_XML = "<files><file><name>test</name><crc>10</crc><size>20</size></file></files>";
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testListComparatorNullArg() {
-        this.rule.expect(NullPointerException.class);
         new ListComparator(null, VALID_XML);
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testListComparatorArgNull() {
-        this.rule.expect(NullPointerException.class);
         new ListComparator(VALID_XML, null);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testListComparatorArgInvalidArg() {
-        this.rule.expect(IllegalArgumentException.class);
         new ListComparator(VALID_XML, INVALID_XML);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testListComparatorInvalidArgArg() {
-        this.rule.expect(IllegalArgumentException.class);
         new ListComparator(INVALID_XML, VALID_XML);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testListComparatorEmptyArgArg() {
-        this.rule.expect(IllegalArgumentException.class);
         new ListComparator("", VALID_XML);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testListComparatorArgEmptyArg() {
-        this.rule.expect(IllegalArgumentException.class);
         new ListComparator(VALID_XML, "");
     }
 

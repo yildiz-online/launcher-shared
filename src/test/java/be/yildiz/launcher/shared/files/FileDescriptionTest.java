@@ -21,18 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  */
 
-package be.yildiz.launcher.shared;
+package be.yildiz.launcher.shared.files;
 
-import be.yildiz.launcher.shared.files.FileDescription;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class FileDescriptionTest {
-
-    @Rule
-    public final ExpectedException rule = ExpectedException.none();
 
     @Test
     public void testFileDescription() {
@@ -42,32 +36,29 @@ public class FileDescriptionTest {
         Assert.assertEquals(0, d.getSize());
     }
 
-    @Test
+    @Test(expected = NullPointerException.class)
     public void testGetName() {
         FileDescription d = new FileDescription("aName", 50, 100);
         Assert.assertEquals("aName", d.getName());
-        this.rule.expect(NullPointerException.class);
-        d = new FileDescription(null, 50, 100);
+        new FileDescription(null, 50, 100);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testGetCrc() {
         FileDescription d = new FileDescription("aName", 50, 100);
         Assert.assertEquals(50, d.getCrc());
         d = new FileDescription("aName", 0, 100);
         Assert.assertEquals(0, d.getCrc());
-        this.rule.expect(IllegalArgumentException.class);
-        d = new FileDescription("a", -1, 100);
+        new FileDescription("a", -1, 100);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testGetSize() {
         FileDescription d = new FileDescription("aName", 50, 100);
         Assert.assertEquals(100, d.getSize());
         d = new FileDescription("aName", 50, 0);
         Assert.assertEquals(0, d.getSize());
-        this.rule.expect(IllegalArgumentException.class);
-        d = new FileDescription("a", 50, -100);
+        new FileDescription("a", 50, -100);
     }
 
     @Test

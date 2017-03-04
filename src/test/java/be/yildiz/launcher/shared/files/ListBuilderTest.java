@@ -21,9 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  */
 
-package be.yildiz.launcher.shared;
+package be.yildiz.launcher.shared.files;
 
-import be.yildiz.launcher.shared.files.ListBuilder;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
