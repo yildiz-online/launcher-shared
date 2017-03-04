@@ -1,28 +1,30 @@
 package be.yildiz.launcher.files;
 
-import java.io.IOException;
-import java.util.List;
-
 import be.yildiz.common.collections.Lists;
 import be.yildiz.common.resource.FileResource;
-import be.yildiz.common.resource.FileResource.FileType;
 import be.yildiz.common.resource.xml.XMLValueTag;
 import be.yildiz.common.resource.xml.XMLWrapTag;
 import be.yildiz.launcher.constant.Constants;
-import lombok.AllArgsConstructor;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Create a list of files containing their name, size and crc32. This list is formatted as an xml with the following tags: <files><file><name></name><crc></crc><size></size></file></files>
  * 
  * @author Van den Borre Grégory
  */
-@AllArgsConstructor
 public final class ListBuilder {
 
     /**
      * Base directory.
      */
     private final String directory;
+
+    public ListBuilder(final String directory) {
+        super();
+        this.directory = directory;
+    }
 
     /**
      * Create an XML String containing a list of files. The files are read from this object instance directory. Thumbs files will be ignored.
@@ -33,7 +35,7 @@ public final class ListBuilder {
      */
     public String createList() throws IOException {
         List<FileResource> files = Lists.newList();
-        new FileResource(this.directory, FileType.DIRECTORY).listFile(files, "Thumbs", Constants.LIST);
+        FileResource.createDirectory(this.directory).listFile(files, "Thumbs", Constants.LIST);
         XMLWrapTag filesTag = new XMLWrapTag("files");
         for (FileResource p : files) {
             XMLWrapTag fileTag = new XMLWrapTag("file");
