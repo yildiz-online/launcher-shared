@@ -21,36 +21,32 @@
   ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<name>Yildiz Launcher Shared</name>
-	<description>Shared components for the yildiz launcher.</description>
-
-	<artifactId>launcher-shared</artifactId>
-	<version>1.0.0</version>
-	
-	<packaging>jar</packaging>
-	<inceptionYear>2011</inceptionYear>
-	<parent>
-		<groupId>be.yildiz-games</groupId>
-		<artifactId>parent</artifactId>
-		<version>2.0.0</version>
-	</parent>
-	
-	<dependencies>
-		<dependency>
-			<groupId>be.yildiz-games</groupId>
-			<artifactId>common-shared</artifactId>
-			<version>2.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-		</dependency>
-	</dependencies>
-</project>
+<settings>
+  <servers>
+    <server>
+      <id>ossrh</id>
+      <username>${env.OSSRH_USER_TOKEN}</username>
+      <password>${env.OSSRH_PWD_TOKEN}</password>
+    </server>
+  </servers>
+  <profiles>
+    <profile>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <gpg.keyname>${env.GPG_KEY}</gpg.keyname>
+        <gpg.passphrase>${env.GPG_PWD}</gpg.passphrase>
+      </properties>
+      <repositories>
+        <repository>
+          <id>ossrh</id>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+</settings>
