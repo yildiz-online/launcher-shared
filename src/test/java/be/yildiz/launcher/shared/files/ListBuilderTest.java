@@ -21,58 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  */
 
-package be.yildiz.launcher.shared.files;
+package be.yildiz.launcher.shared;
 
-import be.yildiz.common.util.Checker;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import be.yildiz.launcher.shared.files.ListBuilder;
+import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
-/**
- * A file description just contains metadata for a file: its name, its CRC32 and its size.
- * 
- * @author Van den Borre Grégory
- */
-@XmlRootElement(name = "file")
-@NoArgsConstructor
-@EqualsAndHashCode
-@Getter
-public final class FileDescription {
+public class ListBuilderTest {
 
-    /**
-     * File name.
-     */
-    private String name;
+    @Rule
+    public TemporaryFolder folder = new TemporaryFolder();
 
-    /**
-     * File CRC.
-     */
-    private long crc;
-
-    /**
-     * File size.
-     */
-    private long size;
-
-    /**
-     * Create a new File description.
-     * 
-     * @param name
-     *            The file name, cannot be null.
-     * @param crc
-     *            The file CRC value, must be >= 0.
-     * @param size
-     *            The file size, must be >=0.
-     */
-    public FileDescription(@NonNull final String name, final long crc, final long size) {
-        super();
-        Checker.exceptionNotPositive(size);
-        Checker.exceptionNotPositive(crc);
-        this.name = name;
-        this.crc = crc;
-        this.size = size;
+    @Test
+    public void testCreateList() throws IOException {
+        folder.create();
+        File properties = folder.newFile("test.prp");
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(properties))) {
+            out.write("aprop = aa\n");
+            out.write("other = bb\n");
+        }
+        ListBuilder builder = new ListBuilder(properties.getParentFile().getPath());
+        String result = builder.createList();
+        Assert.assertEquals("<files><file><name>" + properties.getAbsolutePath() + "</name><crc>2104821731</crc><size>22</size></file></files>", result);
     }
+
+    @Test
+    public void testListBuilder() {
+    }
+
 }

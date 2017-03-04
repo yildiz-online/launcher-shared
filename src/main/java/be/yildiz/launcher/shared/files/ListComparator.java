@@ -23,15 +23,14 @@
 
 package be.yildiz.launcher.shared.files;
 
-import java.util.Collections;
-import java.util.Set;
-
+import be.yildiz.common.collections.Sets;
+import be.yildiz.common.resource.xml.XMLParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import be.yildiz.common.collections.Sets;
-import be.yildiz.common.resource.xml.XMLParser;
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * Compare 2 lists to retrieve missing or additional files.
