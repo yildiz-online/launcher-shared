@@ -33,7 +33,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Create a list of files containing their name, size and crc32. This list is formatted as an xml with the following tags: <files><file><name></name><crc></crc><size></size></file></files>
+ * Create a list of files containing their name, size and crc32. This list is formatted as an xml with the following tags: &lt;files&gt;&lt;file&gt;&lt;name&gt;&lt;/name&gt;&lt;crc&gt;&lt;/crc&gt;&lt;size&gt;&lt;/size&gt;&lt;/file&gt;&lt;/files&gt;
  * 
  * @author Van den Borre Grégory
  */

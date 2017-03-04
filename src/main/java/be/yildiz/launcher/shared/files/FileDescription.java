@@ -63,9 +63,9 @@ public final class FileDescription {
      * @param name
      *            The file name, cannot be null.
      * @param crc
-     *            The file CRC value, must be >= 0.
+     *            The file CRC value, must be greater or equals to 0.
      * @param size
-     *            The file size, must be >=0.
+     *            The file size, must be greater or equals to 0.
      */
     public FileDescription(@NonNull final String name, final long crc, final long size) {
         super();
