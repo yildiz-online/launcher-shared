@@ -24,10 +24,6 @@
 package be.yildiz.launcher.shared.files;
 
 import be.yildiz.common.util.Checker;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -37,9 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Van den Borre Grégory
  */
 @XmlRootElement(name = "file")
-@NoArgsConstructor
-@EqualsAndHashCode
-@Getter
 public final class FileDescription {
 
     /**
@@ -67,12 +60,56 @@ public final class FileDescription {
      * @param size
      *            The file size, must be greater or equals to 0.
      */
-    public FileDescription(@NonNull final String name, final long crc, final long size) {
+    public FileDescription(final String name, final long crc, final long size) {
         super();
+        if(name == null) {
+            throw new NullPointerException();
+        }
         Checker.exceptionNotPositive(size);
         Checker.exceptionNotPositive(crc);
         this.name = name;
         this.crc = crc;
         this.size = size;
+    }
+
+    public FileDescription() {
+        super();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public long getCrc() {
+        return crc;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        FileDescription that = (FileDescription) o;
+
+        if (crc != that.crc) {
+            return false;
+        }
+        return size == that.size && name.equals(that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + (int) (crc ^ (crc >>> 32));
+        result = 31 * result + (int) (size ^ (size >>> 32));
+        return result;
     }
 }
