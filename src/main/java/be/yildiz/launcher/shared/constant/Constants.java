@@ -29,16 +29,15 @@ package be.yildiz.launcher.shared.constant;
  * @author Van den Borre Grégory
  *
  */
-public interface Constants {
-
-    /**
-     * Port to use for file transmission.
-     */
-    int NETWORK_PORT = 15698;
+public final class Constants {
     
     /**
      * Name of the file containing the list of files.
      */
-    String LIST = "list.xml";
+    public static final String LIST = "list.xml";
+
+    private Constants() {
+        super();
+    }
 
 }
