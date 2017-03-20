@@ -112,4 +112,9 @@ public final class FileDescription {
         result = 31 * result + (int) (size ^ (size >>> 32));
         return result;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
