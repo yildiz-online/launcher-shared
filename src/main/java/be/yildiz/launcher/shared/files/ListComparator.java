@@ -24,6 +24,7 @@
 package be.yildiz.launcher.shared.files;
 
 import be.yildiz.common.collections.Sets;
+import be.yildiz.common.log.Logger;
 import be.yildiz.common.resource.xml.XMLParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -80,6 +81,16 @@ public final class ListComparator {
         if (this.expected.equals(this.existing)) {
             return Collections.emptySet();
         }
+        Logger.debug("---------------------existing------------------");
+        this.existing
+                .stream()
+                .map(FileDescription::getName)
+                .forEach(Logger::debug);
+        Logger.debug("---------------------expected------------------");
+        this.expected
+                .stream()
+                .map(FileDescription::getName)
+                .forEach(Logger::debug);
         Set<FileDescription> result = Sets.newSet(this.expected);
         result.removeAll(this.existing);
         return result;
