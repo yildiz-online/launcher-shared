@@ -28,21 +28,21 @@
   <description>Shared components for the yildiz launcher applications.</description>
 
   <artifactId>launcher-shared</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
 
   <packaging>jar</packaging>
   <inceptionYear>2011</inceptionYear>
   <parent>
     <groupId>be.yildiz-games</groupId>
     <artifactId>parent</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
   </parent>
 
   <dependencies>
     <dependency>
       <groupId>be.yildiz-games</groupId>
       <artifactId>common-shared</artifactId>
-      <version>2.1.1</version>
+      <version>2.1.2</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
