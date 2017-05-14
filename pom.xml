@@ -28,7 +28,7 @@
   <description>Shared components for the yildiz launcher applications.</description>
 
   <artifactId>launcher-shared</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.2</version>
 
   <packaging>jar</packaging>
   <inceptionYear>2011</inceptionYear>
