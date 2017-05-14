@@ -63,11 +63,11 @@ public final class FileDescription {
     public FileDescription(final String name, final long crc, final long size) {
         super();
         if(name == null) {
-            throw new NullPointerException();
+            throw new AssertionError("Name cannot be null");
         }
         Checker.exceptionNotPositive(size);
         Checker.exceptionNotPositive(crc);
-        this.name = name;
+        this.name = name.replace("\\", "/");
         this.crc = crc;
         this.size = size;
     }

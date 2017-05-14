@@ -36,7 +36,7 @@ public class FileDescriptionTest {
         Assert.assertEquals(0, d.getSize());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = AssertionError.class)
     public void testGetName() {
         FileDescription d = new FileDescription("aName", 50, 100);
         Assert.assertEquals("aName", d.getName());
@@ -75,6 +75,13 @@ public class FileDescriptionTest {
         Assert.assertNotEquals(f1, f4);
         FileDescription f5 = new FileDescription("a", 10, 1);
         Assert.assertNotEquals(f1, f5);
+    }
+
+    @Test
+    public void testEqualsDifferentSeparators() {
+        FileDescription f1 = new FileDescription("test/test.txt", 10, 15);
+        FileDescription f2 = new FileDescription("test\\test.txt", 10, 15);
+        Assert.assertEquals(f1, f2);
     }
 
     @Test
