@@ -43,7 +43,7 @@ public class FileDescriptionTest {
         new FileDescription(null, 50, 100);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = AssertionError.class)
     public void testGetCrc() {
         FileDescription d = new FileDescription("aName", 50, 100);
         Assert.assertEquals(50, d.getCrc());
@@ -52,7 +52,7 @@ public class FileDescriptionTest {
         new FileDescription("a", -1, 100);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = AssertionError.class)
     public void testGetSize() {
         FileDescription d = new FileDescription("aName", 50, 100);
         Assert.assertEquals(100, d.getSize());
