@@ -24,8 +24,9 @@
 package be.yildiz.launcher.shared.files;
 
 import be.yildiz.common.collections.Sets;
-import be.yildiz.common.log.Logger;
 import be.yildiz.common.resource.xml.XMLParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -39,6 +40,8 @@ import java.util.Set;
  * @author Van den Borre Grégory
  */
 public final class ListComparator {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ListComparator.class);
 
     /**
      * Expected list of files.
@@ -81,16 +84,16 @@ public final class ListComparator {
         if (this.expected.equals(this.existing)) {
             return Collections.emptySet();
         }
-        Logger.debug("---------------------existing------------------");
+        LOGGER.debug("---------------------existing------------------");
         this.existing
                 .stream()
                 .map(FileDescription::getName)
-                .forEach(Logger::debug);
-        Logger.debug("---------------------expected------------------");
+                .forEach(LOGGER::debug);
+        LOGGER.debug("---------------------expected------------------");
         this.expected
                 .stream()
                 .map(FileDescription::getName)
-                .forEach(Logger::debug);
+                .forEach(LOGGER::debug);
         Set<FileDescription> result = Sets.newSet(this.expected);
         result.removeAll(this.existing);
         return result;
