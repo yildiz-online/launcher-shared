@@ -128,8 +128,8 @@ public final class ListComparator {
             Node file = fileList.item(i);
             NodeList fileChildren = file.getChildNodes();
             String name = null;
-            long crc = 0;
-            long size = 0;
+            long crc = -1;
+            long size = -1;
             for (int j = 0; j < fileChildren.getLength(); j++) {
                 Node child = fileChildren.item(j);
                 if ("name".equals(child.getNodeName())) {
@@ -140,7 +140,11 @@ public final class ListComparator {
                     size = Long.parseLong(child.getTextContent());
                 }
             }
-            set.add(new FileDescription(name, crc, size));
+            if(name == null || crc == -1 || size == -1) {
+                LOGGER.error("Invalid value: name: " + name + " crc: " + crc + " size: " + size);
+            } else {
+                set.add(new FileDescription(name, crc, size));
+            }
         }
         return set;
     }
