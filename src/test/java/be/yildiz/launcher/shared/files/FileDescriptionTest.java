@@ -23,73 +23,74 @@
 
 package be.yildiz.launcher.shared.files;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class FileDescriptionTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class FileDescriptionTest {
 
     @Test
-    public void testFileDescription() {
+    void testFileDescription() {
         FileDescription d = new FileDescription();
-        Assert.assertNull(d.getName());
-        Assert.assertEquals(0, d.getCrc());
-        Assert.assertEquals(0, d.getSize());
+        assertNull(d.getName());
+        assertEquals(0, d.getCrc());
+        assertEquals(0, d.getSize());
     }
 
-    @Test(expected = AssertionError.class)
-    public void testGetName() {
+    @Test
+    void testGetName() {
         FileDescription d = new FileDescription("aName", 50, 100);
-        Assert.assertEquals("aName", d.getName());
-        new FileDescription(null, 50, 100);
+        assertEquals("aName", d.getName());
+        assertThrows(AssertionError.class, () -> new FileDescription(null, 50, 100));
     }
 
-    @Test(expected = AssertionError.class)
-    public void testGetCrc() {
+    @Test
+    void testGetCrc() {
         FileDescription d = new FileDescription("aName", 50, 100);
-        Assert.assertEquals(50, d.getCrc());
+        assertEquals(50, d.getCrc());
         d = new FileDescription("aName", 0, 100);
-        Assert.assertEquals(0, d.getCrc());
-        new FileDescription("a", -1, 100);
+        assertEquals(0, d.getCrc());
+        assertThrows(AssertionError.class, () -> new FileDescription("a", -1, 100));
     }
 
-    @Test(expected = AssertionError.class)
-    public void testGetSize() {
+    @Test
+    void testGetSize() {
         FileDescription d = new FileDescription("aName", 50, 100);
-        Assert.assertEquals(100, d.getSize());
+        assertEquals(100, d.getSize());
         d = new FileDescription("aName", 50, 0);
-        Assert.assertEquals(0, d.getSize());
-        new FileDescription("a", 50, -100);
+        assertEquals(0, d.getSize());
+        assertThrows(AssertionError.class, () -> new FileDescription("a", 50, -100));
     }
 
     @Test
-    public void testEquals() {
+    void testEquals() {
         FileDescription f1 = new FileDescription("a", 10, 15);
-        Assert.assertEquals(f1, f1);
-        Assert.assertNotEquals(f1, null);
-        Assert.assertNotEquals(f1, "test");
+        assertEquals(f1, f1);
+        assertNotEquals(f1, null);
+        assertNotEquals(f1, "test");
         FileDescription f2 = new FileDescription("a", 10, 15);
-        Assert.assertEquals(f1, f2);
+        assertEquals(f1, f2);
         FileDescription f3 = new FileDescription("ab", 10, 15);
-        Assert.assertNotEquals(f1, f3);
+        assertNotEquals(f1, f3);
         FileDescription f4 = new FileDescription("a", 110, 15);
-        Assert.assertNotEquals(f1, f4);
+        assertNotEquals(f1, f4);
         FileDescription f5 = new FileDescription("a", 10, 1);
-        Assert.assertNotEquals(f1, f5);
+        assertNotEquals(f1, f5);
     }
 
     @Test
-    public void testEqualsDifferentSeparators() {
+    void testEqualsDifferentSeparators() {
         FileDescription f1 = new FileDescription("test/test.txt", 10, 15);
         FileDescription f2 = new FileDescription("test\\test.txt", 10, 15);
-        Assert.assertEquals(f1, f2);
+        assertEquals(f1, f2);
     }
 
     @Test
-    public void testHashcode() {
+    void testHashcode() {
         FileDescription f1 = new FileDescription("a", 10, 15);
-        Assert.assertEquals(f1.hashCode(), f1.hashCode());
+        assertEquals(f1.hashCode(), f1.hashCode());
         FileDescription f3 = new FileDescription("a", 11, 15);
-        Assert.assertNotEquals(f1.hashCode(), f3.hashCode());
+        assertNotEquals(f1.hashCode(), f3.hashCode());
     }
 
 }

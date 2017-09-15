@@ -23,12 +23,13 @@
 
 package be.yildiz.launcher.shared.files;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-public class ListComparatorTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class ListComparatorTest {
 
     private static final String VALID_XML = "<test></test>";
 
@@ -38,73 +39,73 @@ public class ListComparatorTest {
 
     private static final String NOT_ALL_FILES_XML = "<files><file><name>test</name><crc>10</crc><size>20</size></file></files>";
 
-    @Test(expected = NullPointerException.class)
-    public void testListComparatorNullArg() {
-        new ListComparator(null, VALID_XML);
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void testListComparatorArgNull() {
-        new ListComparator(VALID_XML, null);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testListComparatorArgInvalidArg() {
-        new ListComparator(VALID_XML, INVALID_XML);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testListComparatorInvalidArgArg() {
-        new ListComparator(INVALID_XML, VALID_XML);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testListComparatorEmptyArgArg() {
-        new ListComparator("", VALID_XML);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testListComparatorArgEmptyArg() {
-        new ListComparator(VALID_XML, "");
+    @Test
+    void testListComparatorNullArg() {
+        assertThrows(NullPointerException.class, () -> new ListComparator(null, VALID_XML));
     }
 
     @Test
-    public void testListComparatorArgArg() {
+    void testListComparatorArgNull() {
+        assertThrows(NullPointerException.class, () -> new ListComparator(VALID_XML, null));
+    }
+
+    @Test
+    void testListComparatorArgInvalidArg() {
+        assertThrows(IllegalArgumentException.class, () -> new ListComparator(VALID_XML, INVALID_XML));
+    }
+
+    @Test
+    void testListComparatorInvalidArgArg() {
+        assertThrows(IllegalArgumentException.class, () -> new ListComparator(INVALID_XML, VALID_XML));
+    }
+
+    @Test
+    void testListComparatorEmptyArgArg() {
+        assertThrows(IllegalArgumentException.class, () -> new ListComparator("", VALID_XML));
+    }
+
+    @Test
+    void testListComparatorArgEmptyArg() {
+        assertThrows(IllegalArgumentException.class, () -> new ListComparator(VALID_XML, ""));
+    }
+
+    @Test
+    void testListComparatorArgArg() {
         new ListComparator(VALID_XML, VALID_XML);
     }
 
     @Test
-    public void testListComparatorWrongXml() {
+    void testListComparatorWrongXml() {
         // FIXME uncomment
         // fails();
     }
 
     @Test
-    public void testGetMissing() {
+    void testGetMissing() {
         ListComparator c = new ListComparator(ALL_FILES_XML, ALL_FILES_XML);
         Set<FileDescription> result = c.getMissing();
-        Assert.assertTrue(result.isEmpty());
+        assertTrue(result.isEmpty());
         c = new ListComparator(ALL_FILES_XML, NOT_ALL_FILES_XML);
         result = c.getMissing();
-        Assert.assertTrue(result.size() == 1);
+        assertTrue(result.size() == 1);
         FileDescription d = result.iterator().next();
-        Assert.assertEquals("test2", d.getName());
-        Assert.assertEquals(11, d.getCrc());
-        Assert.assertEquals(25, d.getSize());
+        assertEquals("test2", d.getName());
+        assertEquals(11, d.getCrc());
+        assertEquals(25, d.getSize());
     }
 
     @Test
-    public void testGetAdditional() {
+    void testGetAdditional() {
         ListComparator c = new ListComparator(ALL_FILES_XML, ALL_FILES_XML);
         Set<FileDescription> result = c.getAdditional();
-        Assert.assertTrue(result.isEmpty());
+        assertTrue(result.isEmpty());
         c = new ListComparator(NOT_ALL_FILES_XML, ALL_FILES_XML);
         result = c.getAdditional();
-        Assert.assertTrue(result.size() == 1);
+        assertTrue(result.size() == 1);
         FileDescription d = result.iterator().next();
-        Assert.assertEquals("test2", d.getName());
-        Assert.assertEquals(11, d.getCrc());
-        Assert.assertEquals(25, d.getSize());
+        assertEquals("test2", d.getName());
+        assertEquals(11, d.getCrc());
+        assertEquals(25, d.getSize());
     }
 
 }
