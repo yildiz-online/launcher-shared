@@ -41,7 +41,7 @@ import java.util.Set;
  */
 public final class ListComparator {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ListComparator.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * Expected list of files.
@@ -84,16 +84,16 @@ public final class ListComparator {
         if (this.expected.equals(this.existing)) {
             return Collections.emptySet();
         }
-        LOGGER.debug("---------------------existing------------------");
+        this.logger.debug("---------------------existing------------------");
         this.existing
                 .stream()
                 .map(FileDescription::getName)
-                .forEach(LOGGER::debug);
-        LOGGER.debug("---------------------expected------------------");
+                .forEach(logger::debug);
+        this.logger.debug("---------------------expected------------------");
         this.expected
                 .stream()
                 .map(FileDescription::getName)
-                .forEach(LOGGER::debug);
+                .forEach(this.logger::debug);
         Set<FileDescription> result = Sets.newSet(this.expected);
         result.removeAll(this.existing);
         return result;
@@ -141,7 +141,7 @@ public final class ListComparator {
                 }
             }
             if(name == null || crc == -1 || size == -1) {
-                LOGGER.error("Invalid value: name: " + name + " crc: " + crc + " size: " + size);
+                this.logger.error("Invalid value: name: " + name + " crc: " + crc + " size: " + size);
             } else {
                 set.add(new FileDescription(name, crc, size));
             }
