@@ -22,38 +22,23 @@
  *
  */
 
-package be.yildiz.launcher.shared.files;
+package be.yildizgames.launcher.shared.constant;
 
-import org.junit.jupiter.api.Test;
+/**
+ * Constants shared between client and server.
+ * 
+ * @author Van den Borre Grégory
+ *
+ */
+public final class Constants {
+    
+    /**
+     * Name of the file containing the list of files.
+     */
+    public static final String LIST = "list.xml";
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class ListBuilderTest {
-
-
-    @Test
-    void testCreateList() throws IOException {
-        Path path = Files.createTempDirectory("test");
-        File file = new File(path.toFile().getAbsolutePath() + "/test.prp");
-        file.createNewFile();
-        try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
-            out.write("aprop = aa\n");
-            out.write("other = bb\n");
-        }
-        ListBuilder builder = new ListBuilder(file.getParentFile().getPath());
-        String result = builder.createList();
-        assertEquals("<files><file><name>" + file.getAbsolutePath() + "</name><crc>2104821731</crc><size>22</size></file></files>", result);
-    }
-
-    @Test
-    void testListBuilder() {
+    private Constants() {
+        super();
     }
 
 }

@@ -22,17 +22,17 @@
  *
  */
 
-package be.yildiz.launcher.shared.files;
+package be.yildizgames.launcher.shared.files;
 
-import be.yildiz.common.collections.Sets;
-import be.yildiz.common.resource.xml.XMLParser;
+import be.yildizgames.common.file.xml.XMLParser;
+import be.yildizgames.common.logging.LogFactory;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -42,7 +42,7 @@ import java.util.Set;
  */
 public final class ListComparator {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LogFactory.getInstance().getLogger(this.getClass());
 
     /**
      * Expected list of files.
@@ -95,7 +95,7 @@ public final class ListComparator {
                 .stream()
                 .map(FileDescription::getName)
                 .forEach(this.logger::debug);
-        Set<FileDescription> result = Sets.newSet(this.expected);
+        Set<FileDescription> result = new HashSet<>(this.expected);
         result.removeAll(this.existing);
         return result;
     }
@@ -109,7 +109,7 @@ public final class ListComparator {
         if (this.expected.equals(this.existing)) {
             return Collections.emptySet();
         }
-        Set<FileDescription> result = Sets.newSet(this.existing);
+        Set<FileDescription> result = new HashSet<>(this.existing);
         result.removeAll(this.expected);
         return result;
     }
@@ -122,7 +122,7 @@ public final class ListComparator {
      * @return The list of file description built from the XML.
      */
     private Set<FileDescription> buildFromString(final String s) {
-        Set<FileDescription> set = Sets.newSet();
+        Set<FileDescription> set = new HashSet<>();
         Document doc = XMLParser.getDocument(s);
         NodeList fileList = doc.getElementsByTagName("file");
         for (int i = 0; i < fileList.getLength(); i++) {

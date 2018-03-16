@@ -22,9 +22,7 @@
  *
  */
 
-package be.yildiz.launcher.shared.files;
-
-import be.yildiz.common.util.Checker;
+package be.yildizgames.launcher.shared.files;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -66,8 +64,12 @@ public final class FileDescription {
         if(name == null) {
             throw new AssertionError("Name cannot be null");
         }
-        Checker.exceptionNotPositive(size);
-        Checker.exceptionNotPositive(crc);
+        if (size < 0) {
+            throw new IllegalArgumentException("Crc is negative.");
+        }
+        if (crc < 0) {
+            throw new IllegalArgumentException("Size is negative.");
+        }
         this.name = name.replace("\\", "/");
         this.crc = crc;
         this.size = size;
@@ -100,10 +102,7 @@ public final class FileDescription {
 
         FileDescription that = (FileDescription) o;
 
-        if (crc != that.crc) {
-            return false;
-        }
-        return size == that.size && name.equals(that.name);
+        return crc == that.crc && size == that.size && name.equals(that.name);
     }
 
     @Override

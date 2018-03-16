@@ -22,7 +22,7 @@
  *
  */
 
-package be.yildiz.launcher.shared.files;
+package be.yildizgames.launcher.shared.files;
 
 import org.junit.jupiter.api.Test;
 
@@ -54,7 +54,7 @@ class FileDescriptionTest {
         assertEquals(50, d.getCrc());
         d = new FileDescription("aName", 0, 100);
         assertEquals(0, d.getCrc());
-        assertThrows(AssertionError.class, () -> new FileDescription("a", -1, 100));
+        assertThrows(IllegalArgumentException.class, () -> new FileDescription("a", -1, 100));
     }
 
     @Test
@@ -63,7 +63,7 @@ class FileDescriptionTest {
         assertEquals(100, d.getSize());
         d = new FileDescription("aName", 50, 0);
         assertEquals(0, d.getSize());
-        assertThrows(AssertionError.class, () -> new FileDescription("a", 50, -100));
+        assertThrows(IllegalArgumentException.class, () -> new FileDescription("a", 50, -100));
     }
 
     @Test

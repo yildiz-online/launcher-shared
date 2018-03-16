@@ -22,7 +22,7 @@
  *
  */
 
-package be.yildiz.launcher.shared.files;
+package be.yildizgames.launcher.shared.files;
 
 import org.junit.jupiter.api.Test;
 

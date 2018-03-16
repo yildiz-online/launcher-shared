@@ -22,15 +22,15 @@
  *
  */
 
-package be.yildiz.launcher.shared.files;
+package be.yildizgames.launcher.shared.files;
 
-import be.yildiz.common.collections.Lists;
-import be.yildiz.common.resource.FileResource;
-import be.yildiz.common.resource.xml.XMLValueTag;
-import be.yildiz.common.resource.xml.XMLWrapTag;
-import be.yildiz.launcher.shared.constant.Constants;
+import be.yildizgames.common.file.FileResource;
+import be.yildizgames.common.file.xml.XMLValueTag;
+import be.yildizgames.common.file.xml.XMLWrapTag;
+import be.yildizgames.launcher.shared.constant.Constants;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,7 +58,7 @@ public final class ListBuilder {
      *             If an exception occurs when trying to access the files.
      */
     public String createList() throws IOException {
-        List<FileResource> files = Lists.newList();
+        List<FileResource> files = new ArrayList<>();
         FileResource.createDirectory(this.directory).listFile(files, "Thumbs", Constants.LIST);
         XMLWrapTag filesTag = new XMLWrapTag("files");
         for (FileResource p : files) {
