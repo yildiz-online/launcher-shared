@@ -142,7 +142,7 @@ public final class ListComparator {
                 }
             }
             if(name == null || crc == -1 || size == -1) {
-                this.logger.error("Invalid value: name: " + name + " crc: " + crc + " size: " + size);
+                this.logger.error("Invalid value: name: {} crc: {} size: {}", name, crc, size);
             } else {
                 set.add(new FileDescription(name, crc, size));
             }
