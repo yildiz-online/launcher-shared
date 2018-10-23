@@ -21,37 +21,26 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  *
  */
+package be.yildizgames.launcher.shared.files.xml;
 
-package be.yildizgames.launcher.shared.files;
+import be.yildizgames.common.file.FileResource;
+import be.yildizgames.common.file.xml.XMLValueTag;
+import be.yildizgames.common.file.xml.XMLWrapTag;
 
-import be.yildizgames.common.file.ResourceUtil;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+/**
+ * This class create an XML tag representing a FileResource.
+ * @author Grégory Van den Borre
+ */
+public class FileResourceEntry extends XMLWrapTag {
 
-import java.io.IOException;
-import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-class ListBuilderTest {
-
-
-    @Test
-    void testCreateList() throws IOException {
-        Path path = Files.createTempDirectory("test");
-        Path file =  path.resolve("test.prp");
-        Files.createFile(file);
-        try (Writer w = ResourceUtil.getFileWriter(file)) {
-            w.write("aprop = aa\n");
-            w.write("other = bb\n");
-        }
-        ListBuilder builder = new ListBuilder(path);
-        String result = builder.createList();
-        Assertions.assertEquals("<files><file><name>" + file.toAbsolutePath() + "</name><crc>2104821731</crc><size>22</size></file></files>", result);
+    /**
+     * Create a new XMLWrapTag ('file') with 'name', 'crc', and 'size' as tags.
+     * @param resource ResourceFile to represent, cannot be null.
+     */
+    public FileResourceEntry(final FileResource resource) {
+        super("file");
+        this.addChild(new XMLValueTag("name", resource.getName()));
+        this.addChild(new XMLValueTag("crc", resource.getCrc32()));
+        this.addChild(new XMLValueTag("size", resource.getSize()));
     }
-
-    @Test
-    void testListBuilder() {
-    }
-
 }

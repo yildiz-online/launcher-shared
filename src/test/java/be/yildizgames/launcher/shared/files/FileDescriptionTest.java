@@ -26,43 +26,40 @@ package be.yildizgames.launcher.shared.files;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class FileDescriptionTest {
 
     @Test
     void testFileDescription() {
         FileDescription d = new FileDescription();
-        assertNull(d.getName());
-        assertEquals(0, d.getCrc());
-        assertEquals(0, d.getSize());
+        assertEquals("", d.name);
+        assertEquals(0, d.crc);
+        assertEquals(0, d.size);
     }
 
     @Test
     void testGetName() {
         FileDescription d = new FileDescription("aName", 50, 100);
-        assertEquals("aName", d.getName());
+        assertEquals("aName", d.name);
         assertThrows(AssertionError.class, () -> new FileDescription(null, 50, 100));
     }
 
     @Test
     void testGetCrc() {
         FileDescription d = new FileDescription("aName", 50, 100);
-        assertEquals(50, d.getCrc());
+        assertEquals(50, d.crc);
         d = new FileDescription("aName", 0, 100);
-        assertEquals(0, d.getCrc());
+        assertEquals(0, d.crc);
         assertThrows(IllegalArgumentException.class, () -> new FileDescription("a", -1, 100));
     }
 
     @Test
     void testGetSize() {
         FileDescription d = new FileDescription("aName", 50, 100);
-        assertEquals(100, d.getSize());
+        assertEquals(100, d.size);
         d = new FileDescription("aName", 50, 0);
-        assertEquals(0, d.getSize());
+        assertEquals(0, d.size);
         assertThrows(IllegalArgumentException.class, () -> new FileDescription("a", 50, -100));
     }
 

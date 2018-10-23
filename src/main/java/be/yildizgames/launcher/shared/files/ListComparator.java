@@ -88,12 +88,12 @@ public final class ListComparator {
         this.logger.debug("---------------------existing------------------");
         this.existing
                 .stream()
-                .map(FileDescription::getName)
+                .map(f -> f.name)
                 .forEach(logger::debug);
         this.logger.debug("---------------------expected------------------");
         this.expected
                 .stream()
-                .map(FileDescription::getName)
+                .map(f -> f.name)
                 .forEach(this.logger::debug);
         Set<FileDescription> result = new HashSet<>(this.expected);
         result.removeAll(this.existing);

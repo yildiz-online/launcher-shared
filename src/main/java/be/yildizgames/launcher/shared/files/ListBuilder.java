@@ -25,12 +25,12 @@
 package be.yildizgames.launcher.shared.files;
 
 import be.yildizgames.common.file.FileResource;
-import be.yildizgames.common.file.xml.XMLValueTag;
 import be.yildizgames.common.file.xml.XMLWrapTag;
 import be.yildizgames.launcher.shared.constant.Constants;
+import be.yildizgames.launcher.shared.files.xml.FileResourceEntry;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Path;
 import java.util.List;
 
 /**
@@ -43,9 +43,9 @@ public final class ListBuilder {
     /**
      * Base directory.
      */
-    private final String directory;
+    private final Path directory;
 
-    public ListBuilder(final String directory) {
+    public ListBuilder(final Path directory) {
         super();
         this.directory = directory;
     }
@@ -58,16 +58,11 @@ public final class ListBuilder {
      *             If an exception occurs when trying to access the files.
      */
     public String createList() throws IOException {
-        List<FileResource> files = new ArrayList<>();
-        FileResource.createDirectory(this.directory).listFile(files, "Thumbs", Constants.LIST);
+        List<FileResource> files = FileResource.createDirectory(this.directory).listFile("Thumbs", Constants.LIST);
         XMLWrapTag filesTag = new XMLWrapTag("files");
-        for (FileResource p : files) {
-            XMLWrapTag fileTag = new XMLWrapTag("file");
-            filesTag.addChild(fileTag);
-            fileTag.addChild(new XMLValueTag("name", p.getName()));
-            fileTag.addChild(new XMLValueTag("crc", p.getCrc32()));
-            fileTag.addChild(new XMLValueTag("size", p.getSize()));
-        }
-        return filesTag.generate(new StringBuilder());
+        files.stream()
+                .map(FileResourceEntry::new)
+                .forEach(filesTag::addChild);
+        return filesTag.generate();
     }
 }

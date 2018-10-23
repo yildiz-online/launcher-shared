@@ -37,17 +37,17 @@ public final class FileDescription {
     /**
      * File name.
      */
-    private String name;
+    public final String name;
 
     /**
      * File CRC.
      */
-    private long crc;
+    public final long crc;
 
     /**
      * File size.
      */
-    private long size;
+    public final long size;
 
     /**
      * Create a new File description.
@@ -77,18 +77,9 @@ public final class FileDescription {
 
     public FileDescription() {
         super();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public long getCrc() {
-        return crc;
-    }
-
-    public long getSize() {
-        return size;
+        this.name = "";
+        this.crc = 0;
+        this.size = 0;
     }
 
     @Override

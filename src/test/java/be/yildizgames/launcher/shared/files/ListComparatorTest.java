@@ -92,9 +92,9 @@ class ListComparatorTest {
         result = c.getMissing();
         assertTrue(result.size() == 1);
         FileDescription d = result.iterator().next();
-        assertEquals("test2", d.getName());
-        assertEquals(11, d.getCrc());
-        assertEquals(25, d.getSize());
+        assertEquals("test2", d.name);
+        assertEquals(11, d.crc);
+        assertEquals(25, d.size);
     }
 
     @Test
@@ -106,9 +106,9 @@ class ListComparatorTest {
         result = c.getAdditional();
         assertTrue(result.size() == 1);
         FileDescription d = result.iterator().next();
-        assertEquals("test2", d.getName());
-        assertEquals(11, d.getCrc());
-        assertEquals(25, d.getSize());
+        assertEquals("test2", d.name);
+        assertEquals(11, d.crc);
+        assertEquals(25, d.size);
     }
 
 }
