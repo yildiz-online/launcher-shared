@@ -24,13 +24,13 @@
 
 package be.yildizgames.launcher.shared.files;
 
+import be.yildizgames.common.exception.technical.TechnicalException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ListComparatorTest {
 
@@ -54,12 +54,12 @@ class ListComparatorTest {
 
     @Test
     void testListComparatorArgInvalidArg() {
-        assertThrows(IllegalArgumentException.class, () -> new ListComparator(VALID_XML, INVALID_XML));
+        assertThrows(TechnicalException.class, () -> new ListComparator(VALID_XML, INVALID_XML));
     }
 
     @Test
     void testListComparatorInvalidArgArg() {
-        assertThrows(IllegalArgumentException.class, () -> new ListComparator(INVALID_XML, VALID_XML));
+        assertThrows(TechnicalException.class, () -> new ListComparator(INVALID_XML, VALID_XML));
     }
 
     @Test
@@ -79,8 +79,7 @@ class ListComparatorTest {
 
     @Test
     void testListComparatorWrongXml() {
-        // FIXME uncomment
-        // fails();
+        Assertions.assertThrows(TechnicalException.class, () -> new ListComparator(ALL_FILES_XML, INVALID_XML));
     }
 
     @Test
@@ -104,7 +103,7 @@ class ListComparatorTest {
         assertTrue(result.isEmpty());
         c = new ListComparator(NOT_ALL_FILES_XML, ALL_FILES_XML);
         result = c.getAdditional();
-        assertTrue(result.size() == 1);
+        assertEquals(1,result.size());
         FileDescription d = result.iterator().next();
         assertEquals("test2", d.name);
         assertEquals(11, d.crc);
