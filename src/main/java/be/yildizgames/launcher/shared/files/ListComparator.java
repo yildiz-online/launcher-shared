@@ -25,8 +25,8 @@
 package be.yildizgames.launcher.shared.files;
 
 import be.yildizgames.common.file.xml.XMLParser;
-import be.yildizgames.common.logging.LogFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -42,7 +42,7 @@ import java.util.Set;
  */
 public final class ListComparator {
 
-    private final Logger logger = LogFactory.getInstance().getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * Expected list of files.
