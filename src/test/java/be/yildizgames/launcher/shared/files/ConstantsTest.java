@@ -27,10 +27,10 @@ import be.yildizgames.launcher.shared.constant.Constants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class ConstantsTest {
+public class ConstantsTest {
 
     @Test
-    void testValues() {
+    public void testValues() {
         Assertions.assertEquals("list.xml", Constants.LIST);
     }
 }

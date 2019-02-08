@@ -28,10 +28,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FileDescriptionTest {
+public class FileDescriptionTest {
 
     @Test
-    void testFileDescription() {
+    public void testFileDescription() {
         FileDescription d = new FileDescription();
         assertEquals("", d.name);
         assertEquals(0, d.crc);
@@ -39,14 +39,14 @@ class FileDescriptionTest {
     }
 
     @Test
-    void testGetName() {
+    public void testGetName() {
         FileDescription d = new FileDescription("aName", 50, 100);
         assertEquals("aName", d.name);
         assertThrows(AssertionError.class, () -> new FileDescription(null, 50, 100));
     }
 
     @Test
-    void testGetCrc() {
+    public void testGetCrc() {
         FileDescription d = new FileDescription("aName", 50, 100);
         assertEquals(50, d.crc);
         d = new FileDescription("aName", 0, 100);
@@ -55,7 +55,7 @@ class FileDescriptionTest {
     }
 
     @Test
-    void testGetSize() {
+    public void testGetSize() {
         FileDescription d = new FileDescription("aName", 50, 100);
         assertEquals(100, d.size);
         d = new FileDescription("aName", 50, 0);
@@ -64,7 +64,7 @@ class FileDescriptionTest {
     }
 
     @Test
-    void testEquals() {
+    public void testEquals() {
         FileDescription f1 = new FileDescription("a", 10, 15);
         assertEquals(f1, f1);
         assertNotEquals(f1, null);
@@ -80,14 +80,14 @@ class FileDescriptionTest {
     }
 
     @Test
-    void testEqualsDifferentSeparators() {
+    public void testEqualsDifferentSeparators() {
         FileDescription f1 = new FileDescription("test/test.txt", 10, 15);
         FileDescription f2 = new FileDescription("test\\test.txt", 10, 15);
         assertEquals(f1, f2);
     }
 
     @Test
-    void testHashcode() {
+    public void testHashcode() {
         FileDescription f1 = new FileDescription("a", 10, 15);
         assertEquals(f1.hashCode(), f1.hashCode());
         FileDescription f3 = new FileDescription("a", 11, 15);

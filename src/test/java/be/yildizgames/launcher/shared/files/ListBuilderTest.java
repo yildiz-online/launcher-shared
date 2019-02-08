@@ -33,11 +33,11 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-class ListBuilderTest {
+public class ListBuilderTest {
 
 
     @Test
-    void testCreateList() throws IOException {
+    public void testCreateList() throws IOException {
         Path path = Files.createTempDirectory("test");
         Path file =  path.resolve("test.prp");
         Files.createFile(file);
@@ -51,7 +51,7 @@ class ListBuilderTest {
     }
 
     @Test
-    void testListBuilder() {
+    public void testListBuilder() {
     }
 
 }

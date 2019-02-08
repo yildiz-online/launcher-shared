@@ -32,7 +32,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ListComparatorTest {
+public class ListComparatorTest {
 
     private static final String VALID_XML = "<test></test>";
 
@@ -43,47 +43,47 @@ class ListComparatorTest {
     private static final String NOT_ALL_FILES_XML = "<files><file><name>test</name><crc>10</crc><size>20</size></file></files>";
 
     @Test
-    void testListComparatorNullArg() {
+    public void testListComparatorNullArg() {
         assertThrows(NullPointerException.class, () -> new ListComparator(null, VALID_XML));
     }
 
     @Test
-    void testListComparatorArgNull() {
+    public void testListComparatorArgNull() {
         assertThrows(NullPointerException.class, () -> new ListComparator(VALID_XML, null));
     }
 
     @Test
-    void testListComparatorArgInvalidArg() {
+    public void testListComparatorArgInvalidArg() {
         assertThrows(TechnicalException.class, () -> new ListComparator(VALID_XML, INVALID_XML));
     }
 
     @Test
-    void testListComparatorInvalidArgArg() {
+    public void testListComparatorInvalidArgArg() {
         assertThrows(TechnicalException.class, () -> new ListComparator(INVALID_XML, VALID_XML));
     }
 
     @Test
-    void testListComparatorEmptyArgArg() {
+    public void testListComparatorEmptyArgArg() {
         assertThrows(IllegalArgumentException.class, () -> new ListComparator("", VALID_XML));
     }
 
     @Test
-    void testListComparatorArgEmptyArg() {
+    public void testListComparatorArgEmptyArg() {
         assertThrows(IllegalArgumentException.class, () -> new ListComparator(VALID_XML, ""));
     }
 
     @Test
-    void testListComparatorArgArg() {
+    public void testListComparatorArgArg() {
         new ListComparator(VALID_XML, VALID_XML);
     }
 
     @Test
-    void testListComparatorWrongXml() {
+    public void testListComparatorWrongXml() {
         Assertions.assertThrows(TechnicalException.class, () -> new ListComparator(ALL_FILES_XML, INVALID_XML));
     }
 
     @Test
-    void testGetMissing() {
+    public void testGetMissing() {
         ListComparator c = new ListComparator(ALL_FILES_XML, ALL_FILES_XML);
         Set<FileDescription> result = c.getMissing();
         assertTrue(result.isEmpty());
@@ -97,7 +97,7 @@ class ListComparatorTest {
     }
 
     @Test
-    void testGetAdditional() {
+    public void testGetAdditional() {
         ListComparator c = new ListComparator(ALL_FILES_XML, ALL_FILES_XML);
         Set<FileDescription> result = c.getAdditional();
         assertTrue(result.isEmpty());
