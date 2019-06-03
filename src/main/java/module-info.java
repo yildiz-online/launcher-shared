@@ -26,7 +26,6 @@ module be.yildizgames.launcher.shared {
     requires java.xml.bind;
     requires be.yildizgames.common.file;
     requires be.yildizgames.common.file.xml;
-    requires slf4j.api;
     requires be.yildizgames.common.logging;
 
     exports be.yildizgames.launcher.shared.constant;

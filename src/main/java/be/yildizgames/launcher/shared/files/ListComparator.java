@@ -25,8 +25,6 @@
 package be.yildizgames.launcher.shared.files;
 
 import be.yildizgames.common.file.xml.XMLParser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -42,7 +40,7 @@ import java.util.Set;
  */
 public final class ListComparator {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final System.Logger logger = System.getLogger(this.getClass().getName());
 
     /**
      * Expected list of files.
@@ -85,16 +83,16 @@ public final class ListComparator {
         if (this.expected.equals(this.existing)) {
             return Collections.emptySet();
         }
-        this.logger.debug("---------------------existing------------------");
+        this.logger.log(System.Logger.Level.DEBUG,"---------------------existing------------------");
         this.existing
                 .stream()
                 .map(f -> f.name)
-                .forEach(logger::debug);
-        this.logger.debug("---------------------expected------------------");
+                .forEach(s -> logger.log(System.Logger.Level.DEBUG, s));
+        this.logger.log(System.Logger.Level.DEBUG, "---------------------expected------------------");
         this.expected
                 .stream()
                 .map(f -> f.name)
-                .forEach(this.logger::debug);
+                .forEach(s -> logger.log(System.Logger.Level.DEBUG, s));
         Set<FileDescription> result = new HashSet<>(this.expected);
         result.removeAll(this.existing);
         return result;
@@ -142,7 +140,7 @@ public final class ListComparator {
                 }
             }
             if(name == null || crc == -1 || size == -1) {
-                this.logger.error("Invalid value: name: {} crc: {} size: {}", name, crc, size);
+                this.logger.log(System.Logger.Level.ERROR, "Invalid value: name: {} crc: {} size: {}", name, crc, size);
             } else {
                 set.add(new FileDescription(name, crc, size));
             }
