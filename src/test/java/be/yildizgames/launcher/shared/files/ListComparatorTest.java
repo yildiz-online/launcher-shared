@@ -24,7 +24,6 @@
 
 package be.yildizgames.launcher.shared.files;
 
-import be.yildizgames.common.exception.technical.TechnicalException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -56,13 +55,13 @@ public class ListComparatorTest {
     @Disabled
     @Test
     public void testListComparatorArgInvalidArg() {
-        assertThrows(TechnicalException.class, () -> new ListComparator(VALID_XML, INVALID_XML));
+        assertThrows(IllegalStateException.class, () -> new ListComparator(VALID_XML, INVALID_XML));
     }
 
     @Disabled
     @Test
     public void testListComparatorInvalidArgArg() {
-        assertThrows(TechnicalException.class, () -> new ListComparator(INVALID_XML, VALID_XML));
+        assertThrows(IllegalStateException.class, () -> new ListComparator(INVALID_XML, VALID_XML));
     }
 
     @Test
@@ -83,7 +82,7 @@ public class ListComparatorTest {
     @Disabled
     @Test
     public void testListComparatorWrongXml() {
-        Assertions.assertThrows(TechnicalException.class, () -> new ListComparator(ALL_FILES_XML, INVALID_XML));
+        Assertions.assertThrows(IllegalStateException.class, () -> new ListComparator(ALL_FILES_XML, INVALID_XML));
     }
 
     @Test
